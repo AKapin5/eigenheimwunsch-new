@@ -10,16 +10,16 @@ cache:
     - node_modules/
 
 install:
-  image: node:15
+  image: node:20
   stage: install
   script:
-    - yarn install
+    - yarn install --frozen-lockfile
   only:
     - master
 
 
 build:
-  image: node:15
+  image: node:20
   stage: build
   script:
     - CI=false yarn build
