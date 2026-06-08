@@ -1,0 +1,44 @@
+stages:
+  - install
+  - build
+  - deploy
+
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - .npm/
+    - node_modules/
+
+install:
+  image: node:15
+  stage: install
+  script:
+    - yarn install
+  only:
+    - master
+
+
+build:
+  image: node:15
+  stage: build
+  script:
+    - CI=false yarn build
+  artifacts:
+    paths:
+      - build
+    expire_in: 30 mins
+  dependencies:
+    - install
+  only:
+    - master
+  environment:
+    name: build
+
+deploy_master:
+  stage: deploy
+  script:
+    - /home/updater/.virtualenvs/updater/bin/ansible-playbook -i /home/updater/repo/ansible/hosts/wm /home/updater/repo/ansible/playbooks/$CI_PROJECT_NAME.yml --extra-vars build_src=/home/updater/$CI_PROJECT_DIR/build/
+  tags:
+    - updater
+  only:
+    - master

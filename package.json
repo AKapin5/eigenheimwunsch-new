@@ -1,0 +1,67 @@
+{
+  "name": "eigenheim",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "@types/axios": "^0.14.0",
+    "@types/fslightbox-react": "^1.4.0",
+    "@types/jest": "^26.0.15",
+    "@types/node": "^12.0.0",
+    "@types/react": "^16.0.0",
+    "@types/react-dom": "^16.0.0",
+    "@types/react-modal": "^3.12.0",
+    "@types/react-redux": "^7.1.16",
+    "@types/react-router-dom": "^5.1.7",
+    "@types/redux": "^3.6.0",
+    "@types/swiper": "^5.4.2",
+    "axios": "^0.21.1",
+    "fela": "^11.6.1",
+    "fslightbox-react": "^1.6.2",
+    "react": "^16.0.0",
+    "react-date-picker": "^8.1.1",
+    "react-dom": "^16.0.0",
+    "react-fela": "^11.6.1",
+    "react-hook-form": "^7.2.0",
+    "react-imask": "^6.0.7",
+    "react-modal": "^3.12.1",
+    "react-modal-videojs": "^0.3.0",
+    "react-modern-calendar-datepicker": "^3.1.6",
+    "react-range": "^1.8.7",
+    "react-redux": "^7.2.3",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "4.0.3",
+    "react-select": "^4.3.0",
+    "react-spring": "9.0.0-rc.3",
+    "redux": "^4.0.5",
+    "swiper": "^6.5.5",
+    "typescript": "^4.1.2",
+    "web-vitals": "^1.0.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
