@@ -3,10 +3,10 @@ import React, { useReducer } from "react";
 import { Stepper } from "./Stepper";
 
 import FirstStep from "./Steps/FirstStep";
-import SecondStep from "./Steps/SecondStep";
-import ThirdStep from "./Steps/ThirdStep";
+import { SecondStep } from "./Steps/SecondStep";
+import { ThirdStep } from "./Steps/ThirdStep";
 import FourthStep from "./Steps/FourthStep";
-import FifthStep from "./Steps/FifthStep";
+import { FifthStep } from "./Steps/FifthStep";
 import SixthStep from "./Steps/SixthStep";
 
 export type MortgageData = {
