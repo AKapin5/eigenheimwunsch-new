@@ -1,11 +1,14 @@
-export async function sendEmail(
-  subject: string,
-  message: string
-) {
-  console.log("EMAIL:", subject);
-  console.log(message);
+type EmailParams = {
+  subject: string;
+  html: string;
+};
 
-  return {
-    success: true,
-  };
+export async function sendEmail({
+  subject,
+  html,
+}: EmailParams) {
+  console.log(subject);
+  console.log(html);
+
+  return { success: true };
 }
