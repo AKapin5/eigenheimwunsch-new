@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
-import Stepper from "../Stepper";
-import RangeSlider from "../RangeSlider";
+import { Stepper } from "../Stepper";
+import { RangeSlider } from "../RangeSlider";
 
 import euroIcon from "../../../assets/images/dist/rechner/euro-icon.png";
 
