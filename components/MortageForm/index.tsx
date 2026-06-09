@@ -141,6 +141,9 @@ export const MortageForm: React.FC = () => {
   };
 
   const stepProps = {
+    hidden: false,
+    step: state.step,
+    numOfSteps: state.numOfSteps,
     data: state.data,
     dispatch,
     setError,
