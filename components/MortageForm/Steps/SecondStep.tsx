@@ -1,124 +1,113 @@
-import React, { useState } from "react";
+import React from "react";
 import Select from "react-select";
+import familyIcon from "../../../assets/images/dist/rechner/family-icon.png";
 
-import { sendMetrik } from "../../utils/GoogleAnalytics";
-
-type Option = { value: number; label: string };
-
-type MortgageData = {
-  hasKids: boolean;
-  kidsCount: number;
-  source?: string;
+type Option = {
+  value: number;
+  label: string;
 };
 
-type Action =
-  | { type: "SET_FIELD"; field: keyof MortgageData; value: any }
-  | { type: "NEXT_STEP" }
-  | { type: "PREV_STEP" }
-  | { type: "SET_STEP"; payload: number }
-  | { type: "SET_ERROR"; payload: string | null };
-
-type Props = {
+interface Props {
   hidden: boolean;
-  data: MortgageData;
-  dispatch: React.Dispatch<Action>;
+
+  haveKids: boolean;
+  kidsMoreThree: boolean;
+  kidsCount: number;
+
+  setHaveKids: (val: boolean) => void;
+  setKidsCount: (val: number) => void;
+
+  setPersonFamilyData: (data: {
+    marriaged: boolean;
+    kids: number;
+  }) => void;
+
+  setStep: (step: number) => void;
   setError: (msg: string) => void;
-};
+}
 
-export function SecondStep({ hidden, data, dispatch, setError }: Props) {
-  const [isMarried, setIsMarried] = useState<boolean | undefined>(undefined);
-  const [hasKidsLocal, setHasKidsLocal] = useState<boolean | undefined>(
-    undefined
-  );
-  const [kidsCountLocal, setKidsCountLocal] = useState<number>(0);
+export const SecondStep = React.memo((props: Props) => {
+  const {
+    hidden,
+    haveKids,
+    kidsMoreThree,
+    kidsCount,
+    setHaveKids,
+    setKidsCount,
+    setPersonFamilyData,
+    setStep,
+    setError,
+  } = props;
 
-  if (hidden) return null;
+  const [isMarried, setIsMarried] = React.useState<boolean | undefined>();
+  const [isKids, setIsKids] = React.useState<boolean | undefined>(undefined);
+  const [numOfKids, setNumOfKids] = React.useState<number>(0);
 
-  const marriageOptions: Option[] = [
+  const marriedOptions: Option[] = [
     { value: 1, label: "Verheiratet" },
     { value: 0, label: "Nicht verheiratet" },
   ];
 
-  const kidsOptions: Option[] = Array.from({ length: 10 }, (_, i) => ({
+  const kidsOptions: Option[] = Array.from({ length: 10 }).map((_, i) => ({
     value: i + 1,
     label: String(i + 1),
   }));
 
-  const handleKidsToggle = (value: number) => {
+  const handleIsKids = (value: number) => {
     const hasKids = Boolean(value);
 
-    setHasKidsLocal(hasKids);
-
-    dispatch({
-      type: "SET_FIELD",
-      field: "hasKids",
-      value: hasKids,
-    });
+    setIsKids(hasKids);
+    setHaveKids(hasKids);
 
     if (hasKids) {
-      dispatch({
-        type: "SET_FIELD",
-        field: "kidsCount",
-        value: 1,
-      });
+      setKidsCount(1);
     } else {
-      dispatch({
-        type: "SET_FIELD",
-        field: "kidsCount",
-        value: 0,
-      });
+      setKidsCount(0);
     }
   };
 
-  const handleMarriageSelect = (option: Option | null) => {
-    setIsMarried(option?.value === 1);
+  const handleMarried = (option: Option | null) => {
+    if (!option) return;
+    setIsMarried(Boolean(option.value));
   };
 
   const handleKidsSelect = (option: Option | null) => {
     if (!option) return;
+    setNumOfKids(option.value);
+    setKidsCount(option.value);
+  };
 
-    setKidsCountLocal(option.value);
-
-    dispatch({
-      type: "SET_FIELD",
-      field: "kidsCount",
-      value: option.value,
-    });
+  const scrollToForm = () => {
+    const el = document.getElementById("MortageForm");
+    if (el) window.scrollTo(0, el.offsetTop);
   };
 
   const handleBack = () => {
-    sendMetrik("BackToFirstStep", "MortageForm", "BackButtonPressed", "");
-
-    dispatch({ type: "PREV_STEP" });
+    setStep(1);
+    scrollToForm();
   };
 
   const handleContinue = () => {
-    if (isMarried === undefined) {
-      setError("Bitte Familienstand auswählen");
+    if (
+      isMarried === undefined ||
+      haveKids === undefined ||
+      (haveKids && kidsMoreThree && kidsCount === 0) ||
+      (haveKids && !numOfKids)
+    ) {
+      setError("Nicht alle Felder sind ausgefüllt");
       return;
     }
 
-    if (hasKidsLocal === undefined) {
-      setError("Bitte Kinderangabe ausfüllen");
-      return;
-    }
-
-    if (hasKidsLocal && kidsCountLocal === 0) {
-      setError("Bitte Anzahl der Kinder auswählen");
-      return;
-    }
-
-    sendMetrik(
-      "SecondStepPassed",
-      "MortageForm",
-      "NextButtonPressed",
-      ""
-    );
-
-    dispatch({
-      type: "NEXT_STEP",
+    setPersonFamilyData({
+      marriaged: Boolean(isMarried),
+      kids: kidsCount,
     });
+
+    setStep(3);
+    scrollToForm();
   };
+
+  if (hidden) return null;
 
   return (
     <form className="mortgage-form">
@@ -126,33 +115,44 @@ export function SecondStep({ hidden, data, dispatch, setError }: Props) {
         <h2 className="h2">Familienverhältnisse</h2>
 
         <div className="body-content">
+          <img src={familyIcon} alt="Family icon" />
+
+          {/* Marital status */}
           <div className="field">
             <Select
-              options={marriageOptions}
+              options={marriedOptions}
               placeholder="Familienstand"
-              onChange={handleMarriageSelect}
+              onChange={handleMarried}
             />
           </div>
 
+          {/* Kids yes/no */}
           <div className="field">
             <span>Minderjährige Kinder</span>
 
-            <button
-              type="button"
-              onClick={() => handleKidsToggle(1)}
-            >
-              Ja
-            </button>
+            <div className="radio-row">
+              <label>
+                <input
+                  type="radio"
+                  checked={isKids === true}
+                  onChange={() => handleIsKids(1)}
+                />
+                Ja
+              </label>
 
-            <button
-              type="button"
-              onClick={() => handleKidsToggle(0)}
-            >
-              Nein
-            </button>
+              <label>
+                <input
+                  type="radio"
+                  checked={isKids === false}
+                  onChange={() => handleIsKids(0)}
+                />
+                Nein
+              </label>
+            </div>
           </div>
 
-          {hasKidsLocal && (
+          {/* Kids count */}
+          {isKids && (
             <div className="field">
               <Select
                 options={kidsOptions}
@@ -164,21 +164,15 @@ export function SecondStep({ hidden, data, dispatch, setError }: Props) {
         </div>
 
         <div className="buttons">
-          <button
-            type="button"
-            onClick={handleBack}
-          >
+          <button type="button" onClick={handleBack}>
             Zurück
           </button>
 
-          <button
-            type="button"
-            onClick={handleContinue}
-          >
+          <button type="button" onClick={handleContinue}>
             Weiter
           </button>
         </div>
       </div>
     </form>
   );
-}
+});
