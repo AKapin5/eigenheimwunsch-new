@@ -1,5 +1,5 @@
 import React from "react";
-import { BePartnerForm } from '../components/BePartnerForm';
+import PartnerForm from "@/components/PartnerForm";
 
 import partnerSvg from "../assets/images/dist/partner-werden.svg";
 
@@ -39,7 +39,7 @@ export const Partner: React.FC = () => {
         </div>
       </section>
 
-      <BePartnerForm/>
+      <PartnerForm />
     </>
   );
 };
