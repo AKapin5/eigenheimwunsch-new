@@ -73,13 +73,6 @@ export default function FirstStep({
       return;
     }
 
-    sendMetrik(
-      "FirstStepPassed",
-      "MortageForm",
-      "NextButtonPressed",
-      ""
-    );
-
     dispatch({
       type: "SET_FIELD",
       field: "source",
