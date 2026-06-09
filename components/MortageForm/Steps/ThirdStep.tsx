@@ -1,7 +1,5 @@
 import React, { useEffect, useMemo } from "react";
 
-import { sendMetrik } from "../../utils/GoogleAnalytics";
-
 type MortgageData = {
   income: number;
   hasKids: boolean;
@@ -25,11 +23,11 @@ export function ThirdStep({ hidden, data, dispatch }: Props) {
   const finalMortgage = useMemo(() => {
     const BASE = 1200;
     const PERCENT = 0.06;
+    const marriedBonus = 0;
 
-    const marriedBonus = 0; // removed dependency on Redux structure
     const childrenCost = data.hasKids ? data.kidsCount * 50 : 0;
 
-    const monthlyLiabilities = BASE + marriedBonus + childrenCost;
+    const monthlyLiabilities = BASE + childrenCost;
     const yearlyLiabilities = monthlyLiabilities * 12;
 
     const yearlyIncome = data.income * 12;
@@ -49,25 +47,19 @@ export function ThirdStep({ hidden, data, dispatch }: Props) {
   }, [finalMortgage, dispatch]);
 
   const handleBack = () => {
-    sendMetrik("BackToSecondStep", "MortageForm", "BackButtonPressed", "");
-
     dispatch({ type: "PREV_STEP" });
   };
 
   const handleContinue = () => {
-    sendMetrik("ThirdStepPassed", "MortageForm", "NextButtonPressed", "");
-
     dispatch({ type: "NEXT_STEP" });
   };
 
   return (
     <form className="mortgage-form">
       <div className="container">
-
         <h2 className="h2">Finanzierungsvolumen</h2>
 
         <div className="body-content">
-
           <p>
             Die Erstschätzung ergibt, dass Sie eine Finanzierung in folgender Höhe erhalten können:
           </p>
@@ -79,27 +71,17 @@ export function ThirdStep({ hidden, data, dispatch }: Props) {
           <p>
             Nur noch ein Schritt zu den besten Konditionen für Ihre Finanzierung
           </p>
-
         </div>
 
         <div className="buttons">
-
-          <button
-            type="button"
-            onClick={handleBack}
-          >
+          <button type="button" onClick={handleBack}>
             Zurück
           </button>
 
-          <button
-            type="button"
-            onClick={handleContinue}
-          >
+          <button type="button" onClick={handleContinue}>
             Angebot erhalten
           </button>
-
         </div>
-
       </div>
     </form>
   );

@@ -1,6 +1,7 @@
 import React from "react";
 import Select from "react-select";
-import familyIcon from "../../../assets/images/dist/rechner/family-icon.png";
+
+const familyIcon = "/images/dist/rechner/family-icon.png";
 
 type Option = {
   value: number;
