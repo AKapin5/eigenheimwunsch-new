@@ -1,16 +1,18 @@
-import React from "react";
-import { Header, Footer } from "./components";
-import { Route } from "react-router-dom";
-import { Homepage, Partner, Contact } from "./pages";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
-export const App: React.FC = () => {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <>
-      <Header />
-      <Route path='/' component={Homepage} exact />
-      <Route path='/partner' component={Partner} />
-      <Route path='/contact' component={Contact} />
-      <Footer />
-    </>
+    <html lang="de">
+      <body>
+        <Header />
+        {children}
+        <Footer />
+      </body>
+    </html>
   );
-};
+}
