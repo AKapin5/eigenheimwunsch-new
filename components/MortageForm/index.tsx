@@ -57,6 +57,7 @@ const initialState: State = {
   data: {
     name: "",
     email: "",
+    phone: "",
 
     source: "google",
 

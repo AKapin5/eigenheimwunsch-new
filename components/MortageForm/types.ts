@@ -1,6 +1,7 @@
 export type MortgageData = {
   name: string;
   email: string;
+  phone: string;
 
   source: string;
 
