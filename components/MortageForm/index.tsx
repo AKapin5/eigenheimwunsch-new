@@ -2,7 +2,7 @@ import React, { useReducer, useState } from "react";
 
 import { Stepper } from "./Stepper";
 
-import { FirstStep } from "./Steps/FirstStep";
+import FirstStep from "./Steps/FirstStep";
 import { SecondStep } from "./Steps/SecondStep";
 import { ThirdStep } from "./Steps/ThirdStep";
 import FourthStep from "./Steps/FourthStep";
