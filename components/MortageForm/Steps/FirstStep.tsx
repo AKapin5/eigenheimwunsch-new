@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Stepper } from "../Stepper";
 import { RangeSlider } from "../RangeSlider";
 
-import euroIcon from "../../../assets/images/dist/rechner/euro-icon.png";
+const euroIcon = "/images/dist/rechner/euro-icon.png";
 
 import type { MortgageData, Action } from "../types";
 
