@@ -6,7 +6,7 @@ const geoSvg = "/images/dist/geo.svg";
 const mailSvg = "/images/dist/mail.svg";
 const phoneSvg = "/images/dist/phone.svg";
 
-export const Contact: React.FC = () => {
+export default function ContactPage() {
 
   return (
     <>
