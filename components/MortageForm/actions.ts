@@ -1,4 +1,6 @@
-type Action =
+import type { MortgageData } from "./types";
+
+export type Action =
   | { type: "SET_FIELD"; field: keyof MortgageData; value: any }
   | { type: "NEXT_STEP" }
   | { type: "PREV_STEP" }
