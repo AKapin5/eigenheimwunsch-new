@@ -3,27 +3,21 @@ import Select from "react-select";
 
 const familyIcon = "/images/dist/rechner/family-icon.png";
 
-type Option = {
-  value: number;
-  label: string;
+type MortgageData = {
+  income: number;
+  hasKids: boolean;
+  kidsCount: number;
 };
+
+type Action =
+  | { type: "SET_FIELD"; field: keyof MortgageData; value: any }
+  | { type: "NEXT_STEP" }
+  | { type: "PREV_STEP" };
 
 interface Props {
   hidden: boolean;
-
-  haveKids: boolean;
-  kidsMoreThree: boolean;
-  kidsCount: number;
-
-  setHaveKids: (val: boolean) => void;
-  setKidsCount: (val: number) => void;
-
-  setPersonFamilyData: (data: {
-    marriaged: boolean;
-    kids: number;
-  }) => void;
-
-  setStep: (step: number) => void;
+  data: MortgageData;
+  dispatch: React.Dispatch<Action>;
   setError: (msg: string) => void;
 }
 
