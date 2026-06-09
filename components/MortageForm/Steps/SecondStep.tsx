@@ -1,21 +1,19 @@
 import React from "react";
 import Select from "react-select";
 
+import type { MortgageData, Action } from "../types";
+
 const familyIcon = "/images/dist/rechner/family-icon.png";
 
-type MortgageData = {
-  income: number;
-  hasKids: boolean;
-  kidsCount: number;
+type Option = {
+  value: number;
+  label: string;
 };
-
-type Action =
-  | { type: "SET_FIELD"; field: keyof MortgageData; value: any }
-  | { type: "NEXT_STEP" }
-  | { type: "PREV_STEP" };
 
 interface Props {
   hidden: boolean;
+  step: number;
+  numOfSteps: number;
   data: MortgageData;
   dispatch: React.Dispatch<Action>;
   setError: (msg: string) => void;
@@ -24,13 +22,8 @@ interface Props {
 export const SecondStep = React.memo((props: Props) => {
   const {
     hidden,
-    haveKids,
-    kidsMoreThree,
-    kidsCount,
-    setHaveKids,
-    setKidsCount,
-    setPersonFamilyData,
-    setStep,
+    data,
+    dispatch,
     setError,
   } = props;
 
@@ -52,12 +45,24 @@ export const SecondStep = React.memo((props: Props) => {
     const hasKids = Boolean(value);
 
     setIsKids(hasKids);
-    setHaveKids(hasKids);
+    dispatch({
+      type: "SET_FIELD",
+      field: "hasKids",
+      value: hasKids,
+    });
 
     if (hasKids) {
-      setKidsCount(1);
+      dispatch({
+        type: "SET_FIELD",
+        field: "kidsCount",
+        value: 1,
+      });
     } else {
-      setKidsCount(0);
+      dispatch({
+        type: "SET_FIELD",
+        field: "kidsCount",
+        value: 0,
+      });
     }
   };
 
@@ -69,7 +74,11 @@ export const SecondStep = React.memo((props: Props) => {
   const handleKidsSelect = (option: Option | null) => {
     if (!option) return;
     setNumOfKids(option.value);
-    setKidsCount(option.value);
+    dispatch({
+      type: "SET_FIELD",
+      field: "kidsCount",
+      value: option.value,
+    });
   };
 
   const scrollToForm = () => {
@@ -78,27 +87,21 @@ export const SecondStep = React.memo((props: Props) => {
   };
 
   const handleBack = () => {
-    setStep(1);
+    dispatch({ type: "PREV_STEP" });
     scrollToForm();
   };
 
   const handleContinue = () => {
     if (
       isMarried === undefined ||
-      haveKids === undefined ||
-      (haveKids && kidsMoreThree && kidsCount === 0) ||
-      (haveKids && !numOfKids)
+      isKids === undefined ||
+      (isKids && numOfKids === 0)
     ) {
       setError("Nicht alle Felder sind ausgefüllt");
       return;
     }
 
-    setPersonFamilyData({
-      marriaged: Boolean(isMarried),
-      kids: kidsCount,
-    });
-
-    setStep(3);
+    dispatch({ type: "NEXT_STEP" });
     scrollToForm();
   };
 
