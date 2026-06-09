@@ -1,6 +1,4 @@
-import { FelaStyle } from "react-fela";
-
-export const stepper: FelaStyle<{}> = () => ({
+export const stepper = () => ({
   display: "flex",
   flexFlow: "row nowrap",
   justifyContent: "space-between",
@@ -91,7 +89,7 @@ export const stepper: FelaStyle<{}> = () => ({
   },
 });
 
-export const firstStepForm: FelaStyle<{}> = () => ({
+export const firstStepForm = () => ({
   minHeight: "55em",
   backgroundColor: "#eef4ff",
   padding: "120px 0px",
@@ -126,7 +124,7 @@ export const firstStepForm: FelaStyle<{}> = () => ({
   },
 });
 
-export const formHeading: FelaStyle<{}> = () => ({
+export const formHeading = () => ({
   textAlign: "start",
   marginBottom: ".75em",
   fontSize: '36px',
@@ -147,7 +145,7 @@ export const formHeading: FelaStyle<{}> = () => ({
   }
 });
 
-export const formLabel: FelaStyle<{}> = () => ({
+export const formLabel = () => ({
   display: "flex",
   flexFlow: "column nowrap",
   justifyContent: "center",
@@ -158,14 +156,14 @@ export const formLabel: FelaStyle<{}> = () => ({
   },
 });
 
-export const formLabelText: FelaStyle<{}> = () => ({
+export const formLabelText = () => ({
   fontSize: "14px",
   fontWeight: "500",
   marginBottom: "5px",
   display: "block",
 });
 
-export const formInput: FelaStyle<{}> = () => ({
+export const formInput = () => ({
   width: "100%",
   display: "block",
   border: "none",
@@ -181,7 +179,7 @@ export const formInput: FelaStyle<{}> = () => ({
   },
 });
 
-export const formButton: FelaStyle<{}> = () => ({
+export const formButton = () => ({
   marginTop: "5em",
   display: "flex",
   flexFlow: "row nowrap",
@@ -241,7 +239,7 @@ export const formButton: FelaStyle<{}> = () => ({
   },
 });
 
-export const formErrorAlert: FelaStyle<{}> = () => ({
+export const formErrorAlert = () => ({
   backgroundColor: "#cfe2ff",
   color: "#084298",
   padding: "12px 30px",
@@ -279,7 +277,7 @@ export const formErrorAlert: FelaStyle<{}> = () => ({
   },
 });
 
-export const formErrorAlertNoFixed: FelaStyle<{}> = () => ({
+export const formErrorAlertNoFixed = () => ({
   position: 'static',
   left: '0',
   display: 'block',
@@ -289,7 +287,7 @@ export const formErrorAlertNoFixed: FelaStyle<{}> = () => ({
   marginRight: 'auto'
 });
 
-export const buttonBack: FelaStyle<{}> = () => ({
+export const buttonBack = () => ({
   marginRight: "30px",
   backgroundColor: "transparent !important",
   border: "1px solid #779eed",
@@ -299,11 +297,11 @@ export const buttonBack: FelaStyle<{}> = () => ({
   },
 });
 
-export const radioField: FelaStyle<{}> = () => ({
+export const radioField = () => ({
   display: "flex",
 });
 
-export const radioInput: FelaStyle<{}> = () => ({
+export const radioInput = () => ({
   marginRight: "20px",
   marginBottom: "30px",
   "> input": {
@@ -323,7 +321,7 @@ export const radioInput: FelaStyle<{}> = () => ({
   },
 });
 
-export const formSubHeading: FelaStyle<{}> = () => ({
+export const formSubHeading = () => ({
   textAlign: "center",
   fontSize: "24px",
   marginBottom: "50px",
@@ -332,7 +330,7 @@ export const formSubHeading: FelaStyle<{}> = () => ({
   color: "#155797",
 });
 
-export const formDescription: FelaStyle<{}> = () => ({
+export const formDescription = () => ({
   color: "#265796",
   fontSize: "18px",
   fontWeight: "300",
@@ -342,7 +340,7 @@ export const formDescription: FelaStyle<{}> = () => ({
   },
 });
 
-export const finalMortageNumber: FelaStyle<{}> = () => ({
+export const finalMortageNumber = () => ({
   maxWidth: "14.25em",
   height: "2.75em",
   marginBottom: "50px",
@@ -359,7 +357,7 @@ export const finalMortageNumber: FelaStyle<{}> = () => ({
   },
 });
 
-export const fieldsHeading: FelaStyle<{}> = () => ({
+export const fieldsHeading = () => ({
   fontSize: "18px",
   color: "#343347",
   marginBottom: "10px",
@@ -367,7 +365,7 @@ export const fieldsHeading: FelaStyle<{}> = () => ({
   textAlign: "center",
 });
 
-export const formStepInfo: FelaStyle<{}> = () => ({
+export const formStepInfo = () => ({
   textAlign: "center",
   color: "#155797",
   fontSize: "22px",
@@ -381,7 +379,7 @@ export const formStepInfo: FelaStyle<{}> = () => ({
   },
 });
 
-export const customInput: FelaStyle<{}> = () => ({
+export const customInput = () => ({
   fontSize: "14px",
   marginTop: "2.5em",
   minWidth: "17em",
@@ -396,7 +394,7 @@ export const customInput: FelaStyle<{}> = () => ({
   },
 });
 
-export const rangeInputContainer: FelaStyle<{}> = () => ({
+export const rangeInputContainer = () => ({
   width: "100%",
   display: "flex",
   flexFlow: "column nowrap",
@@ -448,7 +446,7 @@ export const rangeInputContainer: FelaStyle<{}> = () => ({
   },
 });
 
-export const rangeInputLabels: FelaStyle<{}> = () => ({
+export const rangeInputLabels = () => ({
   fontSize: "12px",
   width: "87%",
   marginBottom: "1em",
@@ -497,7 +495,7 @@ export const rangeInputLabels: FelaStyle<{}> = () => ({
   }
 });
 
-export const rangeSliderTooltip: FelaStyle<{}> = () => ({
+export const rangeSliderTooltip = () => ({
   fontSize: '14px',
   width: "8em",
   position: 'absolute',
@@ -519,7 +517,7 @@ export const rangeSliderTooltip: FelaStyle<{}> = () => ({
   }
 });
 
-export const rangeNumbers: FelaStyle<{}> = () => ({
+export const rangeNumbers = () => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
@@ -548,7 +546,7 @@ export const rangeNumbers: FelaStyle<{}> = () => ({
   },
 });
 
-export const radioGroup: FelaStyle<{}> = () => ({
+export const radioGroup = () => ({
   minWidth: "7em",
   display: "flex",
   flexFlow: "row nowrap",
@@ -583,13 +581,13 @@ export const radioGroup: FelaStyle<{}> = () => ({
   }
 });
 
-export const radioButton: FelaStyle<{}> = () => ({
+export const radioButton = () => ({
   display: "flex",
   flexFlow: "column nowrap",
   justifyContent: "center",
 });
 
-export const radioRatingLabel: FelaStyle<{}> = () => ({
+export const radioRatingLabel = () => ({
   fontSize: "12px",
   display: "flex",
   flexFlow: "row nowrap",
@@ -627,14 +625,14 @@ export const radioRatingLabel: FelaStyle<{}> = () => ({
   },
 });
 
-export const dnone: FelaStyle<{}> = () => ({
+export const dnone = () => ({
   display: "none",
 });
 
-export const dblock: FelaStyle<{}> = () => ({
+export const dblock = () => ({
   display: "block",
 });
 
-export const blueArrowSection: FelaStyle<{}> = () => ({
+export const blueArrowSection = () => ({
   display: "flex",
 })

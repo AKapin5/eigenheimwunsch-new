@@ -15,3 +15,347 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.contact-center-wrapper {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.contact-title-center {
+  text-align: center;
+}
+
+.contact-list {
+  margin: 0 auto;
+  padding: 0;
+  list-style-type: none;
+  display: inline-block;
+}
+
+.contact-list li {
+  margin-bottom: 15px;
+  position: relative;
+}
+
+.contact-list li > img {
+  max-width: 20px;
+  position: absolute;
+  top: 4px;
+}
+
+.contact-list li > a {
+  padding-left: 35px;
+  display: block;
+  font-weight: 300;
+  color: #4F4F4F;
+  font-size: 18px;
+  line-height: 32px;
+  text-decoration: none;
+  transition: color 0.25s ease-in;
+}
+
+.contact-list li > a:hover {
+  color: #636262;
+}
+
+.contact-list li > a:focus {
+  color: #3C3C3C;
+}
+
+.contacts-address {
+  display: flex;
+  padding-left: 35px;
+  align-items: center;
+}
+
+.contacts-address > a {
+  margin-right: 20px;
+  font-weight: 300;
+  color: #4F4F4F;
+  font-size: 18px;
+  line-height: 32px;
+  text-decoration: none;
+  transition: color 0.25s ease-in;
+  position: relative;
+}
+
+.contacts-address > a:last-child {
+  padding-left: 35px;
+}
+
+.contacts-address > a > img {
+  max-width: 20px;
+  position: absolute;
+  top: 4px;
+  left: 0;
+}
+
+.contacts-address > a:hover {
+  color: #636262;
+}
+
+.contacts-address > a:focus {
+  color: #3C3C3C;
+}
+
+@media (max-width: 578px) {
+  .contacts-address {
+    flex-wrap: wrap;
+  }
+
+  .contacts-address > a:last-child {
+    padding-left: 0;
+    margin-top: 10px;
+  }
+
+  .contacts-address > a:last-child > img {
+    left: -35px;
+  }
+}
+
+.d-none {
+  display: none !important;
+}
+
+.radio-group {
+  min-width: 7em;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+  flex: 1 0 auto;
+}
+
+@media (max-width: 768px) {
+  .radio-group {
+    width: 80%;
+    margin-left: unset;
+    justify-content: space-between;
+  }
+}
+
+.radio-group.vertical {
+  flex-flow: column nowrap;
+}
+
+.ml-36 {
+  margin-left: 2em !important;
+}
+
+.radio-button {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+}
+
+.radio-rating-label {
+  font-size: 12px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  min-width: 6em;
+}
+
+@media screen and (max-width: 576px) {
+  .radio-rating-label {
+    font-size: 10px;
+  }
+}
+
+.radio-rating-label > .label-text {
+  font-size: inherit;
+  margin-left: 1em;
+  font-weight: 600;
+  color: #8ea5ca;
+}
+
+@media screen and (max-width: 576px) {
+  .radio-rating-label > .label-text {
+    font-size: 10px;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .radio-rating-label > .label-text {
+    position: unset !important;
+    display: inline-block !important;
+  }
+}
+
+@media screen and (min-width: 991px) {
+  .radio-rating-label > .label-text.visible {
+    color: #265796 !important;
+  }
+}
+
+.radio-rating-label > .label-dot {
+  height: 32px;
+  width: 32px;
+  border: none;
+  border-radius: 50%;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.radio-group > div > input:checked + label > .label-text {
+  color: #265796;
+}
+
+.radio-group > div > input:checked + label > .label-dot {
+  border: 3px solid #fff;
+  background-color: #265796;
+  cursor: default;
+}
+
+.range-input-container {
+  width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  flex-basis: 65%;
+}
+
+@media screen and (max-width: 576px) {
+  .range-input-container > div > .track-background {
+    width: 90% !important;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .range-input-container > div:nth-child(3) {
+    width: 94% !important;
+    padding-left: 0 !important;
+  }
+
+  .range-input-container > div > .track-background {
+    width: 92% !important;
+  }
+
+  .range-input-container > div > .track-background:before {
+    width: 115%;
+    left: -1em;
+  }
+}
+
+@media screen and (max-width: 410px) {
+  .range-input-container {
+    width: 97%;
+  }
+}
+
+.range-input-container > div > .track-background {
+  width: 80% !important;
+  margin-left: 1em;
+}
+
+.range-input-container > div > .track-background:before {
+  content: "";
+  width: 109%;
+  height: 5px;
+  display: flex;
+  position: relative;
+  left: -1.5em;
+  background-color: #8ea5ca !important;
+  border-radius: 4px;
+}
+
+.range-input-container > div > .track-background > div {
+  position: relative;
+  top: -0.25em;
+}
+
+.range-input-container > span.range-input-text {
+  font-size: 14px;
+  line-height: 1.5em;
+  font-weight: 400;
+  color: #265796;
+}
+
+.range-input-labels {
+  font-size: 12px;
+  width: 87%;
+  margin-bottom: 1em;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  font-weight: 400;
+  color: #265796;
+}
+
+@media screen and (max-width: 576px) {
+  .range-input-labels {
+    width: unset;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .range-input-labels {
+    margin-top: 2em;
+    width: 100%;
+  }
+
+  .range-input-labels.labels {
+    display: none;
+  }
+
+  .range-input-labels.short-labels {
+    width: 95%;
+    display: flex;
+    align-self: flex-end;
+  }
+
+  .range-input-labels.short-labels > span {
+    flex: unset;
+  }
+
+  .range-input-labels.short-labels > span:first-of-type {
+    padding-right: 1em;
+  }
+}
+
+.range-input-labels.short-labels {
+  display: none;
+}
+
+.range-input-labels.short-labels > span {
+  width: 15%;
+}
+
+.range-input-labels > span {
+  width: 10%;
+  flex: 1 1 auto;
+  text-align: center;
+}
+
+.range-input-labels > span:first-of-type {
+  width: 9%;
+}
+
+@media screen and (max-width: 410px) {
+  .range-input-labels > span:first-of-type {
+    width: 7%;
+  }
+}
+
+.range-slider-tooltip {
+  font-size: 14px;
+  width: 8em;
+  position: absolute;
+  top: 3em;
+  color: #265796;
+  padding: 4px;
+  border-radius: 8px;
+  background-color: #fff;
+  text-align: center;
+}
+
+.range-slider-tooltip:before {
+  height: 1em;
+  width: 1em;
+  content: "";
+  position: absolute;
+  top: -0.5em;
+  left: 3.5em;
+  background-color: #fff;
+  transform: rotate(45deg);
+}

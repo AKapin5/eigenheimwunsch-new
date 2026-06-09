@@ -1,11 +1,5 @@
 import React from "react";
-import { useFela } from "react-fela";
 import { Range, getTrackBackground } from "react-range";
-import {
-  rangeInputContainer,
-  rangeInputLabels,
-  rangeSliderTooltip
-} from "./styles";
 
 interface Iprops {
   value: number[];
@@ -13,7 +7,6 @@ interface Iprops {
 }
 
 export const RangeSlider = React.memo((props: Iprops) => {
-  const { css } = useFela();
   const [rangeValues, setRangeValues] = React.useState<number[]>(props.value || [0])
 
   const rangeLabels = [
@@ -59,11 +52,11 @@ export const RangeSlider = React.memo((props: Iprops) => {
   }, [props.value]);
 
   return (
-    <div className={css(rangeInputContainer)}>
-      <div className={`${css(rangeInputLabels)} labels`}>
+    <div className="range-input-container">
+      <div className="range-input-labels labels">
         {renderRangeInputLabels()}
       </div>
-      <div className={`${css(rangeInputLabels)} short-labels`}>
+      <div className="range-input-labels short-labels">
         {renderShortInputLabels()}
       </div>
       <Range
@@ -121,7 +114,7 @@ export const RangeSlider = React.memo((props: Iprops) => {
           >
             {
               isDragged ?
-              <div className={css(rangeSliderTooltip)}>
+              <div className="range-slider-tooltip">
                 {rangeValues[0].toFixed(0)} EUR
               </div>
               : ""
