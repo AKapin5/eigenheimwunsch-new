@@ -1,15 +1,11 @@
-import React, { useEffect, useMemo } from "react";
+import React, {
+  useMemo,
+} from "react";
 
-type MortgageData = {
-  income: number;
-  hasKids: boolean;
-  kidsCount: number;
-};
-
-type Action =
-  | { type: "SET_FINAL"; value: number }
-  | { type: "NEXT_STEP" }
-  | { type: "PREV_STEP" };
+import type {
+  MortgageData,
+  Action,
+} from "../types";
 
 type Props = {
   hidden: boolean;
@@ -17,68 +13,85 @@ type Props = {
   dispatch: React.Dispatch<Action>;
 };
 
-export function ThirdStep({ hidden, data, dispatch }: Props) {
+export function ThirdStep({
+  hidden,
+  data,
+  dispatch,
+}: Props) {
   if (hidden) return null;
 
-  const finalMortgage = useMemo(() => {
-    const BASE = 1200;
-    const PERCENT = 0.06;
-    const marriedBonus = 0;
+  const finalMortgage =
+    useMemo(() => {
+      const BASE = 1200;
+      const PERCENT = 0.06;
 
-    const childrenCost = data.hasKids ? data.kidsCount * 50 : 0;
+      const marriedCost =
+        data.isMarried ? 300 : 0;
 
-    const monthlyLiabilities = BASE + childrenCost;
-    const yearlyLiabilities = monthlyLiabilities * 12;
+      const childrenCost =
+        data.kidsCount * 50;
 
-    const yearlyIncome = data.income * 12;
+      const monthlyCosts =
+        BASE +
+        marriedCost +
+        childrenCost;
 
-    const net = yearlyIncome - yearlyLiabilities;
+      const yearlyIncome =
+        data.income * 12;
 
-    const result = net / PERCENT;
+      const yearlyCosts =
+        monthlyCosts * 12;
 
-    return result > 0 ? result : 0;
-  }, [data]);
+      const net =
+        yearlyIncome - yearlyCosts;
 
-  useEffect(() => {
-    dispatch({
-      type: "SET_FINAL",
-      value: finalMortgage,
-    });
-  }, [finalMortgage, dispatch]);
-
-  const handleBack = () => {
-    dispatch({ type: "PREV_STEP" });
-  };
-
-  const handleContinue = () => {
-    dispatch({ type: "NEXT_STEP" });
-  };
+      return Math.max(
+        net / PERCENT,
+        0
+      );
+    }, [data]);
 
   return (
     <form className="mortgage-form">
       <div className="container">
-        <h2 className="h2">Finanzierungsvolumen</h2>
+        <h2 className="h2">
+          Finanzierungsvolumen
+        </h2>
 
-        <div className="body-content">
-          <p>
-            Die Erstschätzung ergibt, dass Sie eine Finanzierung in folgender Höhe erhalten können:
-          </p>
+        <p>
+          Die Erstschätzung ergibt,
+          dass Sie eine Finanzierung
+          in folgender Höhe erhalten
+          können:
+        </p>
 
-          <div className="result">
-            {Math.round(finalMortgage).toLocaleString("de-DE")} EUR
-          </div>
-
-          <p>
-            Nur noch ein Schritt zu den besten Konditionen für Ihre Finanzierung
-          </p>
+        <div className="result">
+          {Math.round(
+            finalMortgage
+          ).toLocaleString("de-DE")}{" "}
+          EUR
         </div>
 
         <div className="buttons">
-          <button type="button" onClick={handleBack}>
+          <button
+            type="button"
+            onClick={() =>
+              dispatch({
+                type: "PREV_STEP",
+              })
+            }
+          >
             Zurück
           </button>
 
-          <button type="button" onClick={handleContinue}>
+          <button
+            type="button"
+            onClick={() =>
+              dispatch({
+                type: "NEXT_STEP",
+              })
+            }
+          >
             Angebot erhalten
           </button>
         </div>

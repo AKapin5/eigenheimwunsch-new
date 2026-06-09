@@ -8,6 +8,9 @@ export type MortgageData = {
   hasKids: boolean;
   kidsCount: number;
 
+  isMarried: boolean;
+  finalMortgage: number;
+
   propertyPrice: number;
   income: number;
   duration: number;
