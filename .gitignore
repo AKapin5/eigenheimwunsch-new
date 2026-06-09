@@ -13,6 +13,8 @@
 
 # production
 /build
+/.next
+/out
 
 # misc
 .idea
@@ -25,3 +27,7 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Next.js
+.next
+out

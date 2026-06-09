@@ -25,7 +25,8 @@ build:
     - npm run build
   artifacts:
     paths:
-      - build
+      - .next
+      - public
     expire_in: 30 mins
   dependencies:
     - install
@@ -37,7 +38,7 @@ build:
 deploy_master:
   stage: deploy
   script:
-    - /home/updater/.virtualenvs/updater/bin/ansible-playbook -i /home/updater/repo/ansible/hosts/wm /home/updater/repo/ansible/playbooks/$CI_PROJECT_NAME.yml --extra-vars build_src=/home/updater/$CI_PROJECT_DIR/build/
+    - /home/updater/.virtualenvs/updater/bin/ansible-playbook -i /home/updater/repo/ansible/hosts/wm /home/updater/repo/ansible/playbooks/$CI_PROJECT_NAME.yml --extra-vars build_src=/home/updater/$CI_PROJECT_DIR/.next/
   tags:
     - updater
   only:

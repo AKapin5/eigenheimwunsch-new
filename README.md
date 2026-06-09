@@ -1,6 +1,71 @@
-# Getting Started with Create React App
+# EigenheimWunsch - Next.js Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a modern web application built with [Next.js](https://nextjs.org/).
+
+## Getting Started
+
+### Prerequisites
+- Node.js 18+ 
+- npm or yarn
+
+### Installation
+
+Install dependencies:
+```bash
+npm ci
+```
+
+### Development
+
+Run the development server:
+```bash
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
+
+### Production Build
+
+Build for production:
+```bash
+npm run build
+```
+
+Start the production server:
+```bash
+npm start
+```
+
+### Linting
+
+Run the linter:
+```bash
+npm run lint
+```
+
+## Project Structure
+
+- `/app` - Next.js App Router pages and layouts
+- `/components` - Reusable React components
+- `/lib` - Utility functions and services
+- `/public` - Static assets
+- `/styles` - Global styles
+
+## Pages
+
+- `/` - Home page
+- `/contact` - Contact form page
+- `/partner` - Partner form page
+
+## API Routes
+
+- `POST /api/contact` - Handle contact form submissions
+- `POST /api/partner` - Handle partner form submissions
+
+## Learn More
+
+- [Next.js Documentation](https://nextjs.org/docs)
+- [React Documentation](https://react.dev)
 
 ## Available Scripts
 
