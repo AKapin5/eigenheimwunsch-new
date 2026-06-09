@@ -2,9 +2,9 @@ import React from "react";
 import DatePicker from "react-date-picker";
 import axios from "axios";
 
-import userIcon from "../../../assets/images/dist/rechner/user-icon.png";
+const userIcon = "/images/dist/rechner/user-icon.png";
 
-import { IpersonInfo } from "../../../interfaces";
+import { IpersonInfo } from "../types";
 
 interface Props {
   hidden: boolean;
