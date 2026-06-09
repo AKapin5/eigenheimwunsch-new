@@ -1,50 +1,25 @@
 import React from "react";
 import DatePicker from "react-date-picker";
-import { useFela } from "react-fela";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 
+import { IpersonInfo } from "../../../interfaces";
 import { setPersonData } from "../../../redux/actions/setPersonData";
 import { setFormStep } from "redux/actions/setFormStage";
+import { setError } from "..";
 
 import { Stepper } from "../Stepper";
+
 import userIcon from "../../../assets/images/dist/rechner/user-icon.png";
 import checkIcon from "../../../assets/images/dist/rechner/checkbox-check-icon.png";
 
-import {
-  bodyContent,
-  formInfoContainer,
-  inputsContainer,
-  inputsRow,
-  textAreaWrapper,
-  customInput,
-  formLabel,
-  radioButtonContainer,
-  formDate,
-  customDatepicker,
-  cbx,
-  conf,
-} from "./styles";
-
-import {
-  firstStepForm,
-  formHeading,
-  formLabelText,
-  formButton,
-  radioGroup,
-  radioButton,
-  radioRatingLabel,
-  dnone,
-  dblock,
-} from "../styles";
-
 import { sendMetrik } from "../../utils/GoogleAnalytics";
 
-interface Props {
+interface Iprops {
   hidden: boolean;
 }
 
-interface JsonBody {
+interface IjsonBody {
   anrede: string;
   name: string;
   lastname: string;
@@ -72,21 +47,21 @@ interface JsonBody {
   immoCost: number;
 }
 
-export const FifthStep = React.memo(({ hidden }: Props) => {
-  const { css } = useFela();
+export const FifthStep = React.memo(({ hidden }: Iprops) => {
   const dispatch = useDispatch();
 
-  const initialDate = new Date();
-  initialDate.setFullYear(initialDate.getFullYear() - 18);
+  const initialDate = new Date().setFullYear(
+    new Date().getFullYear() - 18
+  );
 
   const [isConf, setIsConf] = React.useState(false);
 
-  const [form, setForm] = React.useState({
+  const [mortageData, setMortageDate] = React.useState<IpersonInfo>({
     name: "",
     surname: "",
     gender: "Herr",
     employment: "Angestellter",
-    birthday: null as Date | null,
+    birthday: undefined,
     phone: "",
     email: "",
     strasse: "",
@@ -95,43 +70,52 @@ export const FifthStep = React.memo(({ hidden }: Props) => {
     additionalInfo: "",
   });
 
-  const personState = useSelector((state: any) => state.personDateReducer);
-  const mortageState = useSelector((state: any) => state.mortageInfoReducer);
-  const formStepState = useSelector((state: any) => state.formStageReducer);
+  const {
+    personFamilyInfo,
+    personSalary,
+    personSource,
+  } = useSelector((state: any) => state.personDateReducer);
+
+  const {
+    finalMortage,
+    tableData,
+    mortageDuration,
+    propertyValue,
+  } = useSelector((state: any) => state.mortageInfoReducer);
 
   const handleInput = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    setForm((prev) => ({
-      ...prev,
+    setMortageDate({
+      ...mortageData,
       [e.target.name]: e.target.value,
-    }));
+    });
   };
 
   const handleDateInput = (date: any) => {
-    setForm((prev) => ({
-      ...prev,
-      birthday: date ? new Date(date) : null,
-    }));
+    setMortageDate({
+      ...mortageData,
+      birthday: new Date(date),
+    });
   };
 
   const handleGender = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setForm((prev) => ({
-      ...prev,
+    setMortageDate({
+      ...mortageData,
       gender: e.target.value,
-    }));
+    });
   };
 
   const handleEmployment = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setForm((prev) => ({
-      ...prev,
+    setMortageDate({
+      ...mortageData,
       employment: e.target.value,
-    }));
+    });
   };
 
   const scrollToForm = () => {
     const el = document.getElementById("MortageForm");
-    if (el) window.scrollTo({ top: el.offsetTop, behavior: "smooth" });
+    if (el) window.scrollTo(0, el.offsetTop);
   };
 
   const handleBackBtn = () => {
@@ -140,171 +124,193 @@ export const FifthStep = React.memo(({ hidden }: Props) => {
     scrollToForm();
   };
 
-  const validateEmail = (email: string) =>
-    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  const handleContinueBtn = () => {
+    const validateEmail = (email: string) =>
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@/.test(email);
 
-  const validatePhone = (phone: string) =>
-    /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s./0-9]*$/.test(phone);
+    const validatePhone = (phone: string) =>
+      /^[+]*[(]{0,1}[0-9]{1,3}[)]{0,1}[-\s./0-9]*$/g.test(phone);
 
-  const handleContinueBtn = async () => {
-    if (form.name.length < 2) return;
-    if (form.surname.length < 2) return;
-    if (!validatePhone(form.phone)) return;
-    if (!form.birthday) return;
-    if (!validateEmail(form.email)) return;
-    if (!isConf) return;
+    if (mortageData.name.length < 2)
+      return setError(dispatch, "„Vorname“ ausfüllen");
+
+    if (mortageData.surname.length < 2)
+      return setError(dispatch, "„Nachname“ ausfüllen");
+
+    if (!validatePhone(mortageData.phone) || mortageData.phone.length < 7)
+      return setError(dispatch, "„Telefon“ ausfüllen");
+
+    if (!mortageData.birthday)
+      return setError(dispatch, "„Geburtsdatum“ ausfüllen");
+
+    if (!validateEmail(mortageData.email))
+      return setError(dispatch, "„E-Mail“ ausfüllen");
+
+    if (!isConf)
+      return setError(dispatch, "Alle Felder sind erforderlich");
 
     sendMetrik("LastStepPassed", "MortageForm", "SendButtonPressed", "");
 
-    dispatch(setPersonData(form));
+    const kids = personFamilyInfo?.kids || 0;
 
-    const birthdayStr = form.birthday.toDateString();
-    const plz = parseInt(form.postalCode || "0");
-
-    const jsonBody: JsonBody = {
-      anrede: form.gender,
-      name: form.name,
-      lastname: form.surname,
-      birthday: birthdayStr,
-      email: form.email,
-      phone: form.phone,
-      streetAndHouseNumber: form.strasse,
-      plz,
-      city: form.ort,
-      work: form.employment,
-      message: form.additionalInfo,
-      married: personState.personFamilyInfo?.marriaged || false,
-      children: (personState.personFamilyInfo?.kids || 0) > 0,
-      childrenCount: personState.personFamilyInfo?.kids || 0,
-      foundUs: personState.personSource,
-      income: personState.personSalary,
-      calculated: mortageState.finalMortage,
-      tableData: mortageState.tableData || {},
-      immoCost: mortageState.propertyValue,
+    const payload: IjsonBody = {
+      anrede: mortageData.gender,
+      name: mortageData.name,
+      lastname: mortageData.surname,
+      birthday: String(mortageData.birthday).slice(4, 15),
+      email: mortageData.email,
+      phone: mortageData.phone,
+      streetAndHouseNumber: mortageData.strasse,
+      plz: parseInt(mortageData.postalCode || "0"),
+      city: mortageData.ort,
+      work: mortageData.employment,
+      message: mortageData.additionalInfo,
+      married: personFamilyInfo?.marriaged,
+      children: kids > 0,
+      childrenCount: kids,
+      foundUs: personSource,
+      income: personSalary,
+      calculated: finalMortage,
+      tableData: {
+        Jahren: mortageDuration,
+        Zinsen: tableData?.Zinsen,
+        Tilgung: tableData?.Tilgung,
+        Annuitaet: tableData?.Annuitaet,
+        Darlehensrest: tableData?.Darlehensrest,
+      },
+      immoCost: propertyValue,
     };
 
-    try {
-      await axios.post(
+    axios
+      .post(
         "https://us-central1-eigenheimwunsch-de.cloudfunctions.net/addFullClientInfo",
-        jsonBody,
+        payload,
         {
           headers: {
             "Content-Type": "application/json",
-            Authorization: "Bearer XXX_REDACTED",
+            Authorization:
+              "Bearer e8956e92833ec3a9a9a8283797ed3390c37971f809b914ca01beeca682f275edb262a1baab7ad77fb332a81a4b2efcfd62016d65ef66da06642cb71775562594",
           },
         }
-      );
-
-      dispatch(setFormStep(6));
-      scrollToForm();
-    } catch (err) {
-      console.error(err);
-    }
+      )
+      .then(() => {
+        dispatch(setFormStep(6));
+        scrollToForm();
+      })
+      .catch((err) => {
+        console.error(err);
+        setError(dispatch, "Auf der Serverseite ist ein Fehler aufgetreten");
+      });
   };
 
   if (hidden) return null;
 
   return (
-    <form className={css(firstStepForm, dblock)} id="formHeading">
+    <form className="mortgage-form" id="formHeading">
       <div className="container">
         <Stepper />
 
         <div className="form-wrapper ml-9">
-          <h2 className={`h2 ${css(formHeading)}`}>Persönliche Angaben</h2>
+          <h2 className="h2">Persönliche Angaben</h2>
 
-          <div className={css(bodyContent)}>
+          <div className="body-content">
             <img src={userIcon} alt="User icon" />
 
-            <div className={css(formInfoContainer)}>
+            <div className="form-info-container">
               {/* Gender */}
-              <div className={css(radioButtonContainer)}>
-                <span className={css(formLabelText)}>Anrede</span>
+              <div className="radio-block">
+                <span>Anrede</span>
 
-                <div className={css(radioGroup)}>
-                  {["Herr", "Frau"].map((g) => (
-                    <div key={g} className={css(radioButton)}>
-                      <input
-                        type="radio"
-                        value={g}
-                        checked={form.gender === g}
-                        onChange={handleGender}
-                        className={css(dnone)}
-                      />
-                      <label className={css(radioRatingLabel)}>
-                        <div className="label-dot" />
-                        <span>{g}</span>
-                      </label>
-                    </div>
-                  ))}
-                </div>
+                <label>
+                  <input
+                    type="radio"
+                    value="Herr"
+                    checked={mortageData.gender === "Herr"}
+                    onChange={handleGender}
+                  />
+                  Herr
+                </label>
+
+                <label>
+                  <input
+                    type="radio"
+                    value="Frau"
+                    checked={mortageData.gender === "Frau"}
+                    onChange={handleGender}
+                  />
+                  Frau
+                </label>
               </div>
 
               {/* Inputs */}
-              <div className={css(inputsContainer)}>
-                <div className={css(inputsRow)}>
-                  {["name", "surname", "phone", "email"].map((field) => (
-                    <input
-                      key={field}
-                      name={field}
-                      placeholder={field}
-                      className={css(customInput)}
-                      onChange={handleInput}
-                    />
-                  ))}
-                </div>
+              <div className="inputs">
+                <input name="name" placeholder="Vorname" onChange={handleInput} />
+                <input name="surname" placeholder="Nachname" onChange={handleInput} />
+                <input name="phone" placeholder="Telefonnummer" onChange={handleInput} />
+                <input name="email" placeholder="E-Mail" onChange={handleInput} />
 
-                <div className={css(inputsRow)}>
-                  <input
-                    name="strasse"
-                    placeholder="Straße"
-                    className={css(customInput)}
-                    onChange={handleInput}
-                  />
-                  <input
-                    name="postalCode"
-                    placeholder="PLZ"
-                    className={css(customInput)}
-                    onChange={handleInput}
-                  />
-                  <input
-                    name="ort"
-                    placeholder="Ort"
-                    className={css(customInput)}
-                    onChange={handleInput}
-                  />
+                <input name="strasse" placeholder="Straße" onChange={handleInput} />
+                <input name="postalCode" placeholder="PLZ" onChange={handleInput} />
+                <input name="ort" placeholder="Ort" onChange={handleInput} />
 
-                  <DatePicker
-                    value={form.birthday}
-                    onChange={handleDateInput}
-                    maxDate={initialDate}
-                    className={css(customInput, formDate, customDatepicker)}
-                  />
-                </div>
+                <DatePicker
+                  value={mortageData.birthday}
+                  maxDate={new Date(initialDate)}
+                  onChange={handleDateInput}
+                />
               </div>
 
-              {/* Checkbox */}
-              <div className={css(conf)}>
+              {/* Employment */}
+              <div className="radio-block">
+                <label>
+                  <input
+                    type="radio"
+                    value="Angestellter"
+                    checked={mortageData.employment === "Angestellter"}
+                    onChange={handleEmployment}
+                  />
+                  Angestellter
+                </label>
+
+                <label>
+                  <input
+                    type="radio"
+                    value="Selbständiger"
+                    checked={mortageData.employment === "Selbständiger"}
+                    onChange={handleEmployment}
+                  />
+                  Selbständiger
+                </label>
+              </div>
+
+              {/* Message */}
+              <textarea
+                name="additionalInfo"
+                placeholder="Nachricht"
+                onChange={handleInput}
+              />
+
+              {/* Consent */}
+              <label className="consent">
                 <input
                   type="checkbox"
                   checked={isConf}
-                  onChange={() => setIsConf((p) => !p)}
+                  onChange={() => setIsConf(!isConf)}
                 />
-                <label>
-                  Ich bin einverstanden
-                </label>
-              </div>
+                Ich stimme der Verarbeitung zu
+              </label>
             </div>
           </div>
-        </div>
 
-        <div className={css(formButton)}>
-          <button type="button" onClick={handleBackBtn}>
-            Zurück
-          </button>
+          <div className="form-buttons">
+            <button type="button" onClick={handleBackBtn}>
+              Zurück
+            </button>
 
-          <button type="button" onClick={handleContinueBtn}>
-            Anfrage absenden
-          </button>
+            <button type="button" onClick={handleContinueBtn}>
+              Anfrage absenden
+            </button>
+          </div>
         </div>
       </div>
     </form>
