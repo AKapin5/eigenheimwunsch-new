@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 
-import { sendMetrik } from "../../utils/GoogleAnalytics";
-
 import Stepper from "../Stepper";
 import RangeSlider from "../RangeSlider";
 
