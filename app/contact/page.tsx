@@ -1,10 +1,10 @@
 import React from "react";
 
-import { ContactForm } from '../components/ContactForm';
+import ContactForm from "@/components/ContactForm";
 
-import geoSvg from "../assets/images/dist/geo.svg";
-import mailSvg from "../assets/images/dist/mail.svg";
-import phoneSvg from "../assets/images/dist/phone.svg";
+const geoSvg = "/images/dist/geo.svg";
+const mailSvg = "/images/dist/mail.svg";
+const phoneSvg = "/images/dist/phone.svg";
 
 export const Contact: React.FC = () => {
 
