@@ -1,0 +1,43 @@
+[debug] [2026-06-19T12:55:05.654Z] ----------------------------------------------------------------------
+[debug] [2026-06-19T12:55:05.658Z] Command:       F:\Program Files\nodejs\node.exe F:\Program Files\nodejs\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2026-06-19T12:55:05.659Z] CLI Version:   13.13.1
+[debug] [2026-06-19T12:55:05.659Z] Platform:      win32
+[debug] [2026-06-19T12:55:05.659Z] Node Version:  v22.23.0
+[debug] [2026-06-19T12:55:05.659Z] Time:          Fri Jun 19 2026 15:55:05 GMT+0300 (Eastern European Summer Time)
+[debug] [2026-06-19T12:55:05.660Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2026-06-19T12:55:05.773Z] Object "" in "firebase.json" has unknown property: {"additionalProperty":"apphosting"}
+[debug] [2026-06-19T12:55:05.777Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-06-19T12:55:05.778Z] > authorizing via signed-in user (ew.de.server@gmail.com)
+[debug] [2026-06-19T12:55:05.779Z] Object "" in "firebase.json" has unknown property: {"additionalProperty":"apphosting"}
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  C:\Temp\eigenheimwunsch-test
+
+Before we get started, keep in mind:
+
+  * You are currently outside your home directory
+  * You are initializing within an existing Firebase project directory
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2026-06-19T12:55:46.634Z] Using project from CLI flag: eigenheimwunsch-de
+[debug] [2026-06-19T12:55:46.637Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/eigenheimwunsch-de [none]
+[debug] [2026-06-19T12:55:47.076Z] FetchError: Invalid response body while trying to fetch https://firebase.googleapis.com/v1beta1/projects/eigenheimwunsch-de: Premature close
+[debug] [2026-06-19T12:55:47.078Z] FirebaseError: FetchError: Invalid response body while trying to fetch https://firebase.googleapis.com/v1beta1/projects/eigenheimwunsch-de: Premature close
+    at RetryOperation._fn (F:\Users\Nomad\AppData\Roaming\nvm\v22.23.0\node_modules\firebase-tools\lib\apiv2.js:294:88)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+[error] 
+[error] Error: Failed to get Firebase project eigenheimwunsch-de. Please make sure the project exists and your account has permission to access it.
