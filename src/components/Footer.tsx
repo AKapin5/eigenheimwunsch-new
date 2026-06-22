@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import fbSvg from "../assets/images/dist/facebook.svg";
 
@@ -17,10 +18,10 @@ export const Footer: React.FC = () => {
               </a>
             </li>
             <li>
-              <a href="/Impressum_EigenheimWunsch.pdf" >Impressum</a>
+              <Link to='/impressum'>Impressum</Link>
             </li>
             <li>
-              <a href="/EigenheimWunsch_Datenschutzerklärung_März.pdf" >Datenschutzerklärung</a>
+              <Link to='/datenschutz'>Datenschutzerklärung</Link>
             </li>
           </ul>
         </div>
