@@ -11,25 +11,67 @@ export default function Page() {
   }
 
   return (
+    <>
+    <style>{`
+      .page-enter-text {
+        color: #fff;
+        font-size: 1.875rem;
+        font-weight: bold;
+        text-align: center;
+        word-break: break-word;
+        white-space: normal;
+        line-height: 1.3;
+        padding: 0 1rem;
+      }
+      @media (max-width: 767px) {
+        .page-enter-text {
+          font-size: 1.25rem;
+        }
+      }
+    `}</style>
     <div
-      className="relative flex items-center justify-center w-screen h-screen bg-black cursor-pointer overflow-hidden"
       onClick={() => setEntered(true)}
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        width: "100vw",
+        height: "100vh",
+        cursor: "pointer",
+      }}
     >
-      <picture className="absolute inset-0 flex items-center justify-center">
-        <source media="(max-width: 767px)" srcSet={mobileImage} />
-        <img
-          src={welcomeImage}
-          alt="Welcome"
-          className="w-auto h-auto max-w-[90vw] max-h-[90vh] object-contain"
-        />
-      </picture>
+      <div style={{ position: "relative", lineHeight: 0 }}>
+        <picture>
+          <source media="(max-width: 767px)" srcSet={mobileImage} />
+          <img
+            src={welcomeImage}
+            alt="Welcome"
+            style={{
+              maxWidth: "100vw",
+              maxHeight: "100vh",
+              width: "auto",
+              height: "auto",
+              display: "block",
+            }}
+          />
+        </picture>
 
-      {/* Optional overlay */}
-      <div className="absolute inset-0 flex items-center justify-center bg-black/20">
-        <div className="text-white text-3xl font-bold animate-pulse">
-          Click anywhere to enter
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            backgroundColor: "rgba(0,0,0,0.2)",
+          }}
+        >
+          <div className="page-enter-text">
+            Click anywhere to enter
+          </div>
         </div>
       </div>
     </div>
+    </>
   );
 }
