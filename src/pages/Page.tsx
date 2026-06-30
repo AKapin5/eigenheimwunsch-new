@@ -12,20 +12,20 @@ export default function Page() {
 
   return (
     <div
-      className="relative w-screen h-screen cursor-pointer overflow-hidden"
+      className="relative flex items-center justify-center w-screen h-screen bg-black cursor-pointer overflow-hidden"
       onClick={() => setEntered(true)}
     >
-      <picture className="absolute inset-0 h-full w-full">
+      <picture className="absolute inset-0 flex items-center justify-center">
         <source media="(max-width: 767px)" srcSet={mobileImage} />
         <img
           src={welcomeImage}
           alt="Welcome"
-          className="h-full w-full object-cover object-center"
+          className="w-auto h-auto max-w-[90vw] max-h-[90vh] object-contain"
         />
       </picture>
 
       {/* Optional overlay */}
-      <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
+      <div className="absolute inset-0 flex items-center justify-center bg-black/20">
         <div className="text-white text-3xl font-bold animate-pulse">
           Click anywhere to enter
         </div>
