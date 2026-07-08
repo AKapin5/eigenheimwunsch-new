@@ -1,10 +1,18 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
+import {Link, useLocation} from "react-router-dom";
 import { Homepage as HomePage } from "./Homepage"; // your current homepage component
 import welcomeImage from "../assets/images/dist/new_main_pc.jpg";
 import mobileImage from "../assets/images/dist/new_main_mobi.jpg";
 
 export default function Page() {
   const [entered, setEntered] = useState(false);
+  const location = useLocation<{ showBanner?: boolean }>();
+
+  useEffect(() => {
+    if (location.state?.showBanner) {
+      setEntered(false);
+    }
+  }, [location.state]);
 
   if (entered) {
     return <HomePage />;
@@ -30,14 +38,13 @@ export default function Page() {
       }
     `}</style>
     <div
-      onClick={() => setEntered(true)}
       style={{
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
         width: "100vw",
         height: "100vh",
-        cursor: "pointer",
+
       }}
     >
       <div style={{ position: "relative", lineHeight: 0 }}>
@@ -57,6 +64,7 @@ export default function Page() {
         </picture>
 
         <div
+            onClick={() => setEntered(true)}
           style={{
             position: "absolute",
             inset: 0,
@@ -64,14 +72,22 @@ export default function Page() {
             alignItems: "center",
             justifyContent: "center",
             backgroundColor: "rgba(0,0,0,0.2)",
+            cursor: "pointer",
           }}
         >
           <div className="page-enter-text">
             Click anywhere to enter
           </div>
         </div>
+          <Link
+              to="/contact"
+              title="Jetzt unverbindlich beraten lassen"
+              className="hidden-contact-link"
+
+          > </Link>
       </div>
     </div>
     </>
+
   );
 }
