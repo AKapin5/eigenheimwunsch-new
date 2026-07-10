@@ -47,8 +47,8 @@ export const Contact: React.FC = () => {
                   </li>
                   <li>
                     <img src={mailSvg} alt='geo icon' />
-                    <a href='mailto:info@eigenheimwunsch.de'>
-                      info@eigenheimwunsch.de
+                    <a href='mailto:verwaltung@eigenheimwunsch.de'>
+                      verwaltung@eigenheimwunsch.de
                     </a>
                   </li>
                   <li>
