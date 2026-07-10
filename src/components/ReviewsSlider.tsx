@@ -1,20 +1,20 @@
 import React from "react";
 
-import SwiperCore, { Navigation } from "swiper";
+import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/swiper-bundle.css";
+import "swiper/css";
+import "swiper/css/navigation";
 
 import reviewPerson1 from "../assets/images/dist/review-persons/review-person-1.png";
 import reviewPerson2 from "../assets/images/dist/review-persons/review-person-2.png";
 import reviewPerson3 from "../assets/images/dist/review-persons/review-person-3.png";
-
-SwiperCore.use([Navigation]);
 
 export const ReviewsSlider: React.FC = () => {
   return (
     <>
       <Swiper
         className='reviews-slider'
+        modules={[Navigation]}
         spaceBetween={50}
         navigation
         slidesPerView={1}
