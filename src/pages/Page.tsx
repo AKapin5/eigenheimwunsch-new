@@ -75,9 +75,7 @@ export default function Page() {
             cursor: "pointer",
           }}
         >
-          <div className="page-enter-text">
-            Click anywhere to enter
-          </div>
+          
         </div>
           <Link
               to="/contact"
