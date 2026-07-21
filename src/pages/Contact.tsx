@@ -32,9 +32,9 @@ export const Contact: React.FC = () => {
                 </h3>
                 <ul className={css(contactList)}>
                   <li>
+                    <img src={geoSvg} alt='geo icon' />
                     <div className={css(contactsAddress)}>
                       <a href='https://goo.gl/maps/tf2TLBwPHKBgxYEX6'>
-                        <img src={geoSvg} alt='geo icon' />
                         EigenheimWunsch GmbH <br /> Grabenstraße 10 <br /> 79539
                         Lörrach
                       </a>
@@ -95,27 +95,16 @@ const contactList: FelaStyle<{}> = () => ({
 });
 
 const contactsAddress: FelaStyle<{}> = () => ({
-  display: "flex",
+  display: "block",
   paddingLeft: "35px",
-  alignItems: "center",
   "> a": {
-    marginRight: "20px",
     fontWeight: "300",
     color: "#4F4F4F",
     fontSize: "18px",
     lineHeight: "32px",
     textDecoration: "none",
     transform: "color .25s ease-in",
-    position: 'relative',
-    ":last-child": {
-      paddingLeft: '35px',
-    },
-    "> img": {
-      maxWidth: '20px',
-      position: 'absolute',
-      top: '4px',
-      left: '0px'
-    },
+    display: "block",
     ":hover": {
       color: "#636262",
     },
@@ -123,16 +112,4 @@ const contactsAddress: FelaStyle<{}> = () => ({
       color: "#3C3C3C",
     },
   },
-
-  "@media (max-width: 578px)" : {
-    flexWrap: 'wrap',
-
-    "> a:last-child": {
-      paddingLeft: 0,
-      marginTop: '10px',
-      "> img": {
-        left: '-35px',
-      }
-    }
-  }
 });
