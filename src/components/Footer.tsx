@@ -9,7 +9,7 @@ export const Footer: React.FC = () => {
       <div className='container'>
         <div className='row align-items-center justify-content-between'>
           <div className='main-footer-copyright'>
-            Copyright © 2022. EigenheimWunsch.de
+            Copyright © 2026. EigenheimWunsch.de
           </div>
           <ul className='main-footer-list'>
             <li>

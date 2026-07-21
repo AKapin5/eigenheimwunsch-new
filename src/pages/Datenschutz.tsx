@@ -286,7 +286,7 @@ export const Datenschutz: React.FC = () => {
               </p>
              
               <p className={css(standNote)}>
-                Stand: June 2026
+                Stand: Juni 2026
               </p>
             </div>
           </div>

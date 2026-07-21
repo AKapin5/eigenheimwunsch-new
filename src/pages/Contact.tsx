@@ -32,12 +32,7 @@ export const Contact: React.FC = () => {
                 </h3>
                 <ul className={css(contactList)}>
                   <li>
-                    <img src={geoSvg} alt='geo icon' />
                     <div className={css(contactsAddress)}>
-                      <a href='https://goo.gl/maps/tf2TLBwPHKBgxYEX6'>
-                        EigenheimWunsch GmbH <br /> Hauptstraße 28 <br /> 15806
-                        Zossen
-                      </a>
                       <a href='https://goo.gl/maps/tf2TLBwPHKBgxYEX6'>
                         <img src={geoSvg} alt='geo icon' />
                         EigenheimWunsch GmbH <br /> Grabenstraße 10 <br /> 79539
@@ -54,7 +49,6 @@ export const Contact: React.FC = () => {
                   <li>
                     <img src={phoneSvg} alt='geo icon' />
                     <a href='tel:+4976211694809'>+49 7621 1694 809</a>
-                    <a href='tel:+4976211569777'>+49 7621 1569 777</a>
                   </li>
                 </ul>
               </div>
