@@ -86,10 +86,6 @@ export const Header: React.FC = () => {
       `}</style>
       <nav className='main-navbar'>
 
-        <Link to="/" className='main-navbar__logo'>
-          <img src={logoSvg} alt='logo icon' className='logo__large' />
-          <img src={logoMiniSvg} alt='logo mini icon' className=' logo__small' />
-        </Link>
         <a
             href="/"
             className={`home-nav-btn${isHome ? ' home-nav-btn--active' : ''}`}
@@ -100,7 +96,14 @@ export const Header: React.FC = () => {
         >
           <img src={homeHousesSvg} alt='home houses icon' className='logo__large' />
           <img src={homeHousesMiniSvg} alt='home houses mini icon' className='logo__small' />
-        </a>        <a
+        </a>
+
+        <Link to="/" className='main-navbar__logo'>
+          <img src={logoSvg} alt='logo icon' className='logo__large' />
+          <img src={logoMiniSvg} alt='logo mini icon' className=' logo__small' />
+        </Link>
+        
+        <a
           href="https://eigenheiminfo.de/"
           target="_blank"
           rel="noreferrer"
