@@ -78,7 +78,7 @@ export default function Page() {
           
         </div>
           <Link
-              to="/contact"
+              to="/contact#contact-form"
               title="Jetzt unverbindlich beraten lassen"
               className="hidden-contact-link"
 

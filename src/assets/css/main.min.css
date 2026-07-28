@@ -20,26 +20,26 @@
 
 .hidden-contact-link{
   position: absolute;
-  display:block;
-  width:545px;
-  height:192px;
-  bottom:153px;
-  right:65px; accent-color:
+  display: block;
+  width: 1258px;
+  height: 90px;
+  bottom: 139px;
+  left: calc((100% - 1258px) / 2);
 }
 @media screen and (max-width:1400px){
   .hidden-contact-link{
-    width: 40.5%;
-    height: 22%;
-    bottom: 16%;
-    right: 4.5%;
+    width: 92%;
+    height: 10%;
+    left: 4%;
+    bottom: 15.3%;
   }
 }
 @media screen and (max-width:767px){
   .hidden-contact-link{
     width: 90%;
     height: 14%;
-    bottom: 25%;
-    right: 5%;
+    bottom: 24%;
+    left: 5%;
   }
   .home-nav-btn--active{
     padding: 3px 7px !important;
