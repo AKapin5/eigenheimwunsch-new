@@ -8,9 +8,14 @@ import { IContactData } from "../interfaces";
 import { formErrorAlert, formErrorAlertNoFixed } from "./MortageForm/styles";
 import warningSvg from "../assets/images/dist/warning.svg";
 
-export const ContactForm = React.memo(() => {
+interface ContactFormProps {
+  className?: string;
+}
+
+export const ContactForm = React.memo(({ className }: ContactFormProps) => {
   const dispatch = useDispatch();
   const { css } = useFela();
+  const rootClassName = ["contact-form", className].filter(Boolean).join(" ");
 
   const [contactData, setContactData] = React.useState<IContactData>({
     name: "",
@@ -120,12 +125,12 @@ export const ContactForm = React.memo(() => {
   return (
     <>
       {isSuccess ? (
-        <div className={`active ${css(formErrorAlert, formErrorAlertNoFixed)}`}>
+        <div className={`${rootClassName} active ${css(formErrorAlert, formErrorAlertNoFixed)}`}>
           Vielen Dank für Ihre Anfrage!
           <br /> Wir werden uns schnellstmöglich bei Ihnen melden
         </div>
       ) : (
-        <form id='contact-form'>
+        <form id='contact-form' className={rootClassName}>
           <div className='container'>
             <div className='row blue-form'>
               <div className='col-12'>

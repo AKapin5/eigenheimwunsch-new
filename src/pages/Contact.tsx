@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import React from "react";
 import { useFela, FelaStyle } from "react-fela";
 
 import { ContactForm } from '../components/ContactForm';
@@ -10,18 +9,6 @@ import phoneSvg from "../assets/images/dist/phone.svg";
 
 export const Contact: React.FC = () => {
   const { css } = useFela();
-  const { hash } = useLocation();
-
-  useEffect(() => {
-    if (hash !== "#contact-form") return;
-    const id = requestAnimationFrame(() => {
-      document.getElementById("contact-form")?.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-    });
-    return () => cancelAnimationFrame(id);
-  }, [hash]);
 
   return (
     <>

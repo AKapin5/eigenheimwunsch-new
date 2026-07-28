@@ -25,6 +25,57 @@
   height: 90px;
   bottom: 139px;
   left: calc((100% - 1258px) / 2);
+  z-index: 2;
+  cursor: pointer;
+}
+.page-banner-form{
+  padding: 24px 16px 48px;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+.page-banner-form--visible{
+  opacity: 1;
+  transform: translateY(0);
+}
+.contact-form--banner{
+  margin-bottom: 100px !important;
+}
+/*.contact-form--banner .container{*/
+/*  max-width: 800px!important;*/
+/*}*/
+
+.contact-form--banner .blue-form{
+  padding: 10px 20px 20px;
+}
+.contact-form--banner .blue-form__title{
+  font-size: 27px;
+  margin-bottom: 12px;
+}
+.contact-form--banner .blue-form__fields{
+  gap: 6px;
+}
+.contact-form--banner .blue-form__input span{
+  font-size: 0.875rem;
+}
+.contact-form--banner .blue-form__input input,
+.contact-form--banner .blue-form__input textarea{
+  padding: 10px 12px;
+  font-size: 0.9375rem;
+}
+.contact-form--banner .blue-form__textarea textarea{
+  min-height: 88px;
+  max-height: 120px;
+}
+.contact-form--banner .blue-form__button{
+  margin-top: 8px;
+}
+.contact-form--banner .blue-form__button .button{
+  padding: 10px 28px;
+  font-size: 0.9375rem;
+}
+.contact-form--banner .blue-form__fields .blue-form__input{
+  margin-bottom: 10px;
 }
 @media screen and (max-width:1400px){
   .hidden-contact-link{
