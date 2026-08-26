@@ -7,45 +7,22 @@ import mobileImage from "../assets/images/dist/new_main_mobi.jpg";
 
 export default function Page() {
   const [entered, setEntered] = useState(false);
-  const [showContactForm, setShowContactForm] = useState(false);
-  const [formVisible, setFormVisible] = useState(false);
   const formRef = useRef<HTMLDivElement>(null);
   const location = useLocation<{ showBanner?: boolean }>();
 
   useEffect(() => {
     if (location.state?.showBanner) {
       setEntered(false);
-      setShowContactForm(false);
     }
   }, [location.state]);
 
-  useEffect(() => {
-    if (!showContactForm) {
-      setFormVisible(false);
-      return;
-    }
-
-    const frameId = requestAnimationFrame(() => {
-      setFormVisible(true);
+  const scrollToContactForm = (e?: React.SyntheticEvent) => {
+    e?.stopPropagation();
+    formRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
     });
-
-    return () => cancelAnimationFrame(frameId);
-  }, [showContactForm]);
-
-  useEffect(() => {
-    if (!formVisible) return;
-
-    const frameId = requestAnimationFrame(() => {
-      setTimeout(() => {
-        formRef.current?.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
-      }, 50);
-    });
-
-    return () => cancelAnimationFrame(frameId);
-  }, [formVisible]);
+  };
 
   if (entered) {
     return <HomePage />;
@@ -114,29 +91,23 @@ export default function Page() {
               title="Jetzt unverbindlich beraten lassen"
               role="button"
               tabIndex={0}
-              onClick={(e) => {
-                e.stopPropagation();
-                setShowContactForm(true);
-              }}
+              onClick={scrollToContactForm}
               onKeyDown={(e) => {
                 if (e.key === "Enter" || e.key === " ") {
                   e.preventDefault();
-                  e.stopPropagation();
-                  setShowContactForm(true);
+                  scrollToContactForm(e);
                 }
               }}
             />
           </div>
         </div>
 
-        {showContactForm && (
-          <div
-            ref={formRef}
-            className={`page-banner-form${formVisible ? " page-banner-form--visible" : ""}`}
-          >
-            <ContactForm className="contact-form--banner" />
-          </div>
-        )}
+        <div
+          ref={formRef}
+          className="page-banner-form page-banner-form--visible"
+        >
+          <ContactForm className="contact-form--banner" />
+        </div>
       </div>
     </>
   );
